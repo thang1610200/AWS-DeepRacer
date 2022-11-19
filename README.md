@@ -3,9 +3,9 @@
 ## ĐỀ TÀI: AWS DEEPRACER
 ### Thành Viên
 - Thành viên nhóm: 
- - *20110495 :Nguyễn Lê Huy*
- - *20110568 : Nguyễn Hữu Thắng*
- - *20110053 : Tô Duy Vượng*
+ - *20110495 :Nguyễn Lê Huy*<br />
+ - *20110568 : Nguyễn Hữu Thắng*<br />
+ - *20110053 : Tô Duy Vượng*<br />
 
 ### Tài Liệu Tham Khảo
 - https://aws.amazon.com/deepracer/
