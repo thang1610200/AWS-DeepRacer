@@ -5,7 +5,7 @@
     Các dịch vụ của AWS mà AWS Deepracer sử dụng trực tiếp hoặc gián tiếp:
 - Amazon Elastic Container Registry (Amazon ECR): + là sổ đăng ký bộ chứa được quản lý hoàn toàn, cung cấp dịch vụ lưu trữ hiệu suất cao để bạn có thể triển khai thành phần lạ và hình ảnh ứng dụng ở bất kỳ đâu một cách đáng tin cậy.
 + Được SageMaker gọi gián tiếp để tự động mở rộng quy mô hoạt động của nó.
-<img scr = "">
+<img scr = "https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%201%20-%20Gi%E1%BB%9Bi%20thi%E1%BB%87u%20v%E1%BB%81%20AWSDeepRacer/img/AWS%20ECR.png" width = "400">
 
 ## 1.3/Hạn chế:
 
