@@ -1,7 +1,8 @@
 # Chương 1 - Giới thiệu về AWSDeepRacer
 ## 1.1/ Giới thiệu:
     AWS DeepRacer là phương pháp nhanh nhất (theo đúng nghĩa đen) để làm quen với công nghệ học tăng cường (RL), thông qua một chiếc xe đua tỷ lệ 1/18 tự hành hoàn toàn, được điều khiển bởi model học tăng cường, công cụ mô phỏng đua xe 3D và giải đua xe toàn cầu. Các nhà phát triển có thể huấn luyện, đánh giá và điều chỉnh các mô hình RL trong công cụ mô phỏng trực tuyến, triển khai các mô hình của họ lên AWS DeepRacer để có trải nghiệm xe tự hành trong thế giới thực và thi đấu trong Giải đua AWS DeepRacer để có cơ hội giành Cúp vô địch AWS DeepRacer.
-    <img src = "https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%201%20-%20Gi%E1%BB%9Bi%20thi%E1%BB%87u%20v%E1%BB%81%20AWSDeepRacer/img/gioithieu1.jfif" width = "400">
+    
+<img src = "https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%201%20-%20Gi%E1%BB%9Bi%20thi%E1%BB%87u%20v%E1%BB%81%20AWSDeepRacer/img/gioithieu1.jfif" width = "400">
     <img src = "https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%201%20-%20Gi%E1%BB%9Bi%20thi%E1%BB%87u%20v%E1%BB%81%20AWSDeepRacer/img/gioithieu2.png" width = "400">
     <img src = "https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%201%20-%20Gi%E1%BB%9Bi%20thi%E1%BB%87u%20v%E1%BB%81%20AWSDeepRacer/img/gioithieu3.jfif" width = "400">
     <img src = "https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%201%20-%20Gi%E1%BB%9Bi%20thi%E1%BB%87u%20v%E1%BB%81%20AWSDeepRacer/img/gioithieu4.png" width = 400>
