@@ -2,6 +2,9 @@
 # Chương 2. Xây dựng mô hình.
 
 ## 2.1/Điều chỉnh mô hình ( cấu hình các chức năng xe đua)?
+Điều chỉnh mô mình xe đua ở trong Your Garage. Nó cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riêng mình mà sau đó bạn sẽ sử dụng để đào tạo các mô hình. 
+Theo mặc định, thì nó chứa một xe ảo được đặt tên là  The Original DeepRacer. Xe ban đầu sử dụng một máy ảnh mặt trước, mạng nơ-ron phức hợp 3 lớp. 
+Để tùy chỉnh cấu hình xe ảo mới thì chọn vào Build new vehicle
 
 ## 2.2/Cấu hình model ?
 
