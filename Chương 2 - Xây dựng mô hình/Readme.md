@@ -79,12 +79,12 @@ Thuật toán đào tạo và siêu tham số
 
 So sánh giữa hai thuật toán huấn luyện:
 
-  -Proximal Policy Optimization:
+-Proximal Policy Optimization:
 + Hoạt động trong cả không gian hành động rời rạc và liên tục.
 + Học từ những lần thử bây giờ.
 + Sử dụng regularization.
 
-  -Soft Actor Critic:
+-Soft Actor Critic:
 + Hoạt động trong không gian hành động liên tục.
 + Học từ những quan lỗi của mô hình trước.
 + Thêm entropy vào mục tiêu tối đa.
