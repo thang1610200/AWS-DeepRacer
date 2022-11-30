@@ -79,12 +79,12 @@ Thuật toán đào tạo và siêu tham số
 
 So sánh giữa hai thuật toán huấn luyện:
 
--Proximal Policy Optimization:
+- Proximal Policy Optimization:
 + Hoạt động trong cả không gian hành động rời rạc và liên tục.
 + Học từ những lần thử bây giờ.
 + Sử dụng regularization.
 
--Soft Actor Critic:
+- Soft Actor Critic:
 + Hoạt động trong không gian hành động liên tục.
 + Học từ những quan lỗi của mô hình trước.
 + Thêm entropy vào mục tiêu tối đa.
@@ -192,7 +192,8 @@ def reward_function(params) :
 
     "y": float,                            # tọa độ y của đại lý tính bằng mét
 
-    "closest_objects": [int, int],         # Các chỉ số dựa trên số không của hai đối tượng gần nhất với vị trí hiện tại của tác nhân là (x, y).
+    "closest_objects": [int, int],         
+	# Các chỉ số dựa trên số không của hai đối tượng gần nhất với vị trí hiện tại của tác nhân là (x, y).
 
     "closest_waypoints": [int, int],       # chỉ số của hai điểm tham chiếu gần nhất.
 
@@ -200,19 +201,23 @@ def reward_function(params) :
 
     "is_crashed": Boolean,                 # Boolean cờ để cho biết liệu tác nhân đã gặp sự cố hay chưa.
 
-    "is_left_of_center": Boolean,          # Gắn cờ để cho biết tổng đài viên có ở phía bên trái đến trung tâm theo dõi hay không. 
+    "is_left_of_center": Boolean,          
+	# Gắn cờ để cho biết tổng đài viên có ở phía bên trái đến trung tâm theo dõi hay không. 
 
     "is_offtrack": Boolean,                # Boolean cờ để cho biết liệu tổng đài viên có đi chệch hướng hay không.
 
-    "is_reversed": Boolean,                # để cho biết tổng đài viên đang lái xe theo chiều kim đồng hồ (True) hay ngược chiều kim đồng hồ (False).
+    "is_reversed": Boolean,                
+	# để cho biết tổng đài viên đang lái xe theo chiều kim đồng hồ (True) hay ngược chiều kim đồng hồ (False).
 
     "heading": float,                      # Đại lý ngáp trong độ
 	
-    "objects_distance": [float, ],         # Danh sách khoảng cách của các đối tượng tính bằng mét từ 0 đến track_length so với vạch xuất phát.
+    "objects_distance": [float, ],         
+	# Danh sách khoảng cách của các đối tượng tính bằng mét từ 0 đến track_length so với vạch xuất phát.
    
     "objects_heading": [float, ],          # Danh sách các tiêu đề của các đối tượng theo độ từ -180 đến 180.
    
-    "objects_left_of_center": [Boolean, ], # danh sách các lá cờ Boolean cho biết các đối tượng của các phần tử có còn lại ở giữa (Đúng) hay không (Sai).
+    "objects_left_of_center": [Boolean, ], 
+	# danh sách các lá cờ Boolean cho biết các đối tượng của các phần tử có còn lại ở giữa (Đúng) hay không (Sai).
    
     "objects_location": [(float, float),], # danh sách các vị trí đối tượng [(x,y),...].
    
