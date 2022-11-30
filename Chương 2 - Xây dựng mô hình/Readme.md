@@ -5,12 +5,15 @@
 Điều chỉnh mô mình xe đua ở trong Your Garage. Nó cho phép bạn tạo và tùy chỉnh những chiếc xe ảo của riêng mình mà sau đó bạn sẽ sử dụng để đào tạo các mô hình. 
 Theo mặc định, thì nó chứa một xe ảo được đặt tên là  The Original DeepRacer. Xe ban đầu sử dụng một máy ảnh mặt trước, mạng nơ-ron phức hợp 3 lớp. 
 Để tùy chỉnh cấu hình xe ảo mới thì chọn vào Build new vehicle
+
 <img src="img/1.2.1.png">
 
 Bắt đầu với đặt tên cho xe ảo mà ta chuẩn bị tạo ra nó. 
+
 <img src="img/2.2.1.png">
 
 Tiếp theo đó ta xe chọn ngoại hình cho xe bằng cách đổ màu cho xe nếu sử dụng Vehical model mặc định.
+
 <img src="img/3.2.1.png">
 
 Sau khi hoàn thành thì chọn next để qua bước tiếp theo.
@@ -18,12 +21,15 @@ Cấu hình cảm biến camera cho xe đua.
 + Nếu xe dùng để đua trên đường đua time-trial, thì nên sử dụng camera đơn. Để đua quanh một đường đua mà không có xe hoặc chướng ngại vật khác, chúng ta không cần phải cấu hình phức tạp cho xe và giúp giảm thời gian đào tạo vì càng phức tạp thì thời gian đào tạo càng lâu.
 + Nên sử dụng cảm biến camera âm thanh nổi khi xây dựng mô hình tránh vật thể hoặc mô hình đua xe head-to-head. Chùng ta sẽ sử dụng chức năng phần thưởng theo cách để mô hình học được các đặc điểm chiều sâu từ hình ảnh của ta. Lưu ý rằng trong các mô hình xe head-to-head., camera âm thanh nổi có thể không đủ để che các điểm mù. 
 + Cảm biến LIDAR hướng về phía sau có chức năng quét cách xe khoảng 0,5m. Nó sẽ phát hiện những chiếc xe đang tiến đến từ phía sau hoặc trong những điểm mù khi rẽ. Nên sử dụng nó nếu muốn tham gia vào các cuộc đua head-to-head. 
+
 <img src="img/4.2.1.png">
 
 Tiếp đến chọn Done thì ta sẻ tạo ra được mô hình xe ảo theo ý muốn mà ta đã tùy chỉnh.
 
 ## 2.2/Cấu hình model 
+
 Chọn Your garage để tiến hành các bước cấu hình cho model.
+
 <img src="img/1.2.2.png">
 
  Chọn Create Model để tiến hành tạo Model đào tạo mới.
@@ -42,18 +48,22 @@ Bắt đầu thực hiện cấu hình cho việc đào tạo.
 <img src="img/5.2.2.png">
 
 Sau khi chọn địa hình đào tạo cho Model thì ta sẻ chọn next để qua bước cấu hình tiếp theo.
+
 <img src="img/6.2.2.png">
 
 Ở bước tiếp theo ta sẻ cấu hình về các loại cuộc đua, các giải thuật và siêu tham số đưa vào cho việc đào tạo Model. 
 Giới thiệu về các loại cuộc đua (Race type)
 -	Time trial: Chạy đua với đồng hồ trên một đường đua được đánh dấu rõ ràng màkhông có chướng ngại vật cố định hoặc đối thủ cạnh tranh đang di chuyển.
+
 <img src="img/8.2.2.png">
 
 -	Object avoidance: Xe chạy trên đường hai làn với một số chướng ngại vật cố định được đặt dọc theo đường.
+
 <img src="img/9.2.2.png">
 <img src="img/7.2.2.png">
 
 -	Head-to-Head: Xe chạy đua với các phương tiện đang di chuyển khác trên đường dành cho hai làn đường.
+
 <img src="img/10.2.2.png">
 
 Chọn Object avoidance để tiến hành đào tạo.
@@ -61,6 +71,7 @@ Chọn Object avoidance để tiến hành đào tạo.
 <img src="img/11.2.2.png">
 
 Thuật toán đào tạo và siêu tham số
+
 <img src="img/12.2.2.png">
 
 +  PPO: Thuật toán tối ưu hóa với policy gần.
@@ -81,6 +92,7 @@ Sự hỗn loạn:
 entropy khuyến khích thăm dò. Giá trị alpha SAC tốt để bắt đầu thử nghiệm là 0,5. Điều chỉnh phù hợp khi bạn lặp lại trên các mô hình của mình.
 	Hãy thử cả thuật toán PPO và SAC, thử nghiệm với siêu tham số của chúng và khám phá chúng với mỗi lần huấn luyện mô hình.
 + Proximal Policy Optimization: Thuật toán độ dốc chính sách tiên tiến nhất sử dụng hai mạng thần kinh trong quá trình đào tạo – mạng chính sách và mạng giá trị.
+
 <img src="img/13.2.2.png">
 
 Giải thích các thông số bên trong PPO.
@@ -95,7 +107,6 @@ Number of experience episodes between each policy-updating iteration	     Thông
 
 + Soft Actor Critic: Không giới hạn bản thân trong việc chỉ tìm kiếm phần thưởng tối đa trọn đời, thuật toán này bao gồm việc khám phá, khuyến khích entropy theo đuổi chính sách tối ưu.
 
-
 <img src="img/14.2.2.png">
 
 Giải thích các thông số bên trong SAC.
@@ -109,6 +120,7 @@ Number of experience episodes between each policy-updating iteration	     Thông
 
 -	Chọn PPO với các thông số mặc định.
 Chọn Next để tiến hành qua bước tiếp theo cho việc cấu hình Model đào tạo.
+
 <img src="img/15.2.2.png">
 
 Xác định không gian hành động
@@ -118,6 +130,7 @@ Tại sao không gian hành động lại quan trọng?
 Chọn không gian hành động:
  + Không gian liên tục: Không gian hành động liên tục cho phép tác nhân chọn một
 hành động từ một loạt các giá trị cho mỗi trạng thái. (Continuous action space)
+
 <img src="img/16.2.2.png">
 
 Steering angle (Góc lái): Góc lái xác định phạm vi góc lái mà bánh trước của mô
@@ -133,6 +146,7 @@ tác nhân đối với mỗi trạng thái trong một tập hợp hữu hạn.
 Steering angle (Góc lái): Góc lái xác định phạm vi góc lái mà bánh trước của mô hình của bạn có thể quay.
 Speed (Tốc độ): Tốc độ mà mô hình có thể đạt được. Tốc độ tối đa/tối thiểu được xác định sẵn cho mô hình.
 	Chọn theo Continuous action space theo các thông số mặc định.
+
 <img src="img/19.2.2.png">
 
 Ta tiến hành chọn Next để tiếp tục cấu hình ở bước tiếp theo.
@@ -141,6 +155,7 @@ Ta tiến hành chọn Next để tiếp tục cấu hình ở bước tiếp th
 
 Chọn mô hình xe ảo để đào tạo.
 Có thể chọn mô hình tùy theo ý thích, với hình dưới bên trái là mô hình mình tự tạo, bên phải là mô hình đã được tạo sẵn.
+
 <img src="img/21.2.2.png">
 
 Thuật toán thưởng.
@@ -148,6 +163,7 @@ Thuật toán thưởng.
 function để giúp model trở lên tốt hơn. Sau đó nhấn Validate để đánh giá thuật toán.
 -	Thuật toán thưởng cơ bản (Basic Reward Function): trước tiên chúng ta tạo ba dải
 xung quanh đường đua, sử dụng ba điểm đánh dấu, sau đó tiến hành thưởng  hochiếc xe nhiều hơn khi lái trong dải hẹp thay vì dải trung bình hoặc dải rộng. Cũng cần lưu ý sự khác biệt về kích thước của phần thưởng. Chúng tôi đưa ra phần thưởng là 1 nếu ở trong dải hẹp, 0,5 nếu ở trong dải trung bình và 0,1 nếu ở trong dải rộng. Nếu chúng tôi giảm phần thưởng cho dải hẹp hoặc tăng phần thưởng cho dải trung bình, về cơ bản chúng tôi đang khuyến khích chiếc xe sử dụng một phần lớn hơn của bề mặt đường đua. Điều này có thể hữu ích, đặc biệt là khi có các góc cua gấp.
+
 <img src="img/22.2.2.png">
 
 
@@ -159,38 +175,62 @@ def reward_function(params) :
     return float(reward)
 
 Đối tượng từ điển params chứa các cặp khóa-giá trị sau:
+
 {
     "all_wheels_on_track": Boolean,        # cờ để cho biết liệu xe có đang đi đúng hướng hay không
+
     "x": float,                            # tọa độ x của đại lý tính bằng mét
+
     "y": float,                            # tọa độ y của đại lý tính bằng mét
+
     "closest_objects": [int, int],         # Các chỉ số dựa trên số không của hai đối tượng gần nhất với vị trí hiện tại của tác nhân là (x, y).
+
     "closest_waypoints": [int, int],       # chỉ số của hai điểm tham chiếu gần nhất.
+
     "distance_from_center": float,         # khoảng cách tính bằng mét từ trung tâm đường đua 
+
     "is_crashed": Boolean,                 # Boolean cờ để cho biết liệu tác nhân đã gặp sự cố hay chưa.
+
     "is_left_of_center": Boolean,          # Gắn cờ để cho biết tổng đài viên có ở phía bên trái đến trung tâm theo dõi hay không. 
+
     "is_offtrack": Boolean,                # Boolean cờ để cho biết liệu tổng đài viên có đi chệch hướng hay không.
+
     "is_reversed": Boolean,                # để cho biết tổng đài viên đang lái xe theo chiều kim đồng hồ (True) hay ngược chiều kim đồng hồ (False).
+
     "heading": float,                      # Đại lý ngáp trong độ
+	
     "objects_distance": [float, ],         # Danh sách khoảng cách của các đối tượng tính bằng mét từ 0 đến track_length so với vạch xuất phát.
+   
     "objects_heading": [float, ],          # Danh sách các tiêu đề của các đối tượng theo độ từ -180 đến 180.
+   
     "objects_left_of_center": [Boolean, ], # danh sách các lá cờ Boolean cho biết các đối tượng của các phần tử có còn lại ở giữa (Đúng) hay không (Sai).
+   
     "objects_location": [(float, float),], # danh sách các vị trí đối tượng [(x,y),...].
+   
     "objects_speed": [float, ],            # Danh sách tốc độ của các đối tượng tính bằng mét trên giây.
+   
     "progress": float,                     # tỷ lệ phần trăm của bài hát đã hoàn thành
+   
     "speed": float,                        # Tốc độ của đại lý tính bằng mét trên giây (m / s)
+   
     "steering_angle": float,               # Góc lái của đại lý tính bằng độ
+   
     "steps": int,                          # số bước đã hoàn thành
+   
     "track_length": float,                 # theo dõi chiều dài tính bằng mét.
+   
     "track_width": float,                  # chiều rộng của đường
+   
     "waypoints": [(float, float), ]        # Danh sách (x, y) là các cột mốc dọc theo trung tâm theo dõi
 
 }
 
 Ví dụ : Hàm phần thưởng sử dụng thông số recent_waypoints.
+
 Hàm phần thưởng ví dụ sau minh họa cách sử dụng điểm tham chiếu và điểm_điểm gần nhất cũng như tiêu đề để tính toán phần thưởng ngay lập tức.
 
 def reward_function(params):
-    ###############################################################################
+    
     '''
     Ví dụ về việc sử dụng điểm tham chiếu và hướng đi để làm cho chiếc xe đi đúng hướng
     '''
@@ -228,15 +268,19 @@ def reward_function(params):
 
 
 Điều kiện dừng huấn luyện sau 1 khoảng thời gian (tính theo phút).
+
 <img src="img/23.2.2.png">
 
 Ta có thể tích để thử nghiệm độ hiệu quả của mô hình ta đã training được bằng cách tham gia cuộc đua.
+
 <img src="img/24.2.2.png">
 
 	Tiếp đến ta sẻ chọn Create model để tiếp tục.
+
 <img src="img/25.2.2.png">
 
  	Chờ quá trình tạo Model.
+
 <img src="img/26.2.2.png">
 <img src="img/27.2.2.png">
 
@@ -264,6 +308,7 @@ Chọn Object avoidance. Để chọn cách thực hiện cuộc đua trên đư
 <img src="img/31.2.2.png">
 
 Sau khi hoàn thành tất cả thì ta chọn Start evaluation để tiến hành chạy.
+
 <img src="img/32.2.2.png">
 
  Tiến hành đánh giá sau khi xe chạy hoàn tất.
