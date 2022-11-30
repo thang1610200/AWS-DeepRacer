@@ -57,6 +57,7 @@ Giới thiệu về các loại cuộc đua (Race type)
 <img src="img/10.2.2.png">
 
 Chọn Object avoidance để tiến hành đào tạo.
+
 <img src="img/11.2.2.png">
 
 Thuật toán đào tạo và siêu tham số
@@ -135,6 +136,7 @@ Speed (Tốc độ): Tốc độ mà mô hình có thể đạt được. Tốc 
 <img src="img/19.2.2.png">
 
 Ta tiến hành chọn Next để tiếp tục cấu hình ở bước tiếp theo.
+
 <img src="img/20.2.2.png">
 
 Chọn mô hình xe ảo để đào tạo.
@@ -239,6 +241,7 @@ Ta có thể tích để thử nghiệm độ hiệu quả của mô hình ta đ
 <img src="img/27.2.2.png">
 
 Chờ quá trình đạo tạo cho Model.
+
 <img src="img/28.2.2.png">
 
 Sau khi đào tạo thành công ta có thể sử dụng mô hình để đua trên các cuộc đua bằng việc ta chọn Start evaluation.
@@ -264,6 +267,7 @@ Sau khi hoàn thành tất cả thì ta chọn Start evaluation để tiến hà
 <img src="img/32.2.2.png">
 
  Tiến hành đánh giá sau khi xe chạy hoàn tất.
+
 <img src="img/33.2.2.png">
 
 
