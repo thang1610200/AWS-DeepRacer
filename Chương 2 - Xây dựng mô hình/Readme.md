@@ -8,10 +8,9 @@ Theo mặc định, thì nó chứa một xe ảo được đặt tên là  The 
 <img src="img/1.2.1.png">
 
 Bắt đầu với đặt tên cho xe ảo mà ta chuẩn bị tạo ra nó. 
-
 <img src="img/2.2.1.png">
-Tiếp theo đó ta xe chọn ngoại hình cho xe bằng cách đổ màu cho xe nếu sử dụng Vehical model mặc định.
 
+Tiếp theo đó ta xe chọn ngoại hình cho xe bằng cách đổ màu cho xe nếu sử dụng Vehical model mặc định.
 <img src="img/3.2.1.png">
 
 Sau khi hoàn thành thì chọn next để qua bước tiếp theo.
@@ -23,12 +22,125 @@ Cấu hình cảm biến camera cho xe đua.
 
 Tiếp đến chọn Done thì ta sẻ tạo ra được mô hình xe ảo theo ý muốn mà ta đã tùy chỉnh.
 
+## 2.2/Cấu hình model 
+Chọn Your garage để tiến hành các bước cấu hình cho model.
+<img src="img/1.2.2.png">
+
+ Chọn Create Model để tiến hành tạo Model đào tạo mới.
+<img src="img/2.2.2.png">
+
+Bắt đầu thực hiện cấu hình cho việc đào tạo.
+<img src="img/3.2.2.png">
+
+ Đặt tên và thêm mô tả cho mô hình.
+<img src="img/4.2.2.png">
+
+ Chọn địa hình đào tạo để tiến hành đạo tạo cho mô hình
+<img src="img/5.2.2.png">
+
+Sau khi chọn địa hình đào tạo cho Model thì ta sẻ chọn next để qua bước cấu hình tiếp theo.
+<img src="img/6.2.2.png">
+
+Ở bước tiếp theo ta sẻ cấu hình về các loại cuộc đua, các giải thuật và siêu tham số đưa vào cho việc đào tạo Model. 
+Giới thiệu về các loại cuộc đua (Race type)
+-	Time trial: Chạy đua với đồng hồ trên một đường đua được đánh dấu rõ ràng màkhông có chướng ngại vật cố định hoặc đối thủ cạnh tranh đang di chuyển.
+<img src="img/8.2.2.png">
+
+-	Object avoidance: Xe chạy trên đường hai làn với một số chướng ngại vật cố định được đặt dọc theo đường.
+<img src="img/9.2.2.png">
+<img src="img/7.2.2.png">
+
+-	Head-to-Head: Xe chạy đua với các phương tiện đang di chuyển khác trên đường
+dành cho hai làn đường.
+<img src="img/10.2.2.png">
+
+Chọn Object avoidance để tiến hành đào tạo.
+<img src="img/11.2.2.png">
+
+Thuật toán đào tạo và siêu tham số
+<img src="img/12.2.2.png">
+
++  PPO: Thuật toán tối ưu hóa với policy gần.
++ SAC: Thuật toán tối ưu với policy ngẫu nhiên
+So sánh giữa hai thuật toán huấn luyện:
+Proximal Policy Optimization	Soft Actor Critic
+Hoạt động trong cả không gian hành động rời rạc và liên tục.	Hoạt động trong không gian hành
+động liên tục.
+Học từ những lần thử bây giờ	Học từ những quan lỗi của mô hình trước.
+Sử dụng regularization.	hêm entropy vào mục tiêu tối đa.
+
+Ổn định (dữ liệu liên tục) so với Đói dữ liệu (dữ liệu rời rạc): Thông tin học được bởi các chính sách của thuật toán PPO và SAC trong khi khám phá một môi trường được sử dụng theo cách khác nhau. PPO sử dụng phương pháp học tập theo chính sách có nghĩa là nó học được chức năng giá trị của mình từ những quan sát được thực hiện bởi chính sách hiện tại khám phá môi trường. SAC sử dụng phương pháp học tập ngoài chính sách có nghĩa là nó có thể sử dụng các quan sát được thực hiện bởi quá trình thăm dò môi trường của các chính sách trước đó. Sự cân bằng giữa việc học tập chính sách và học tập đúng chính sách thường là tính ổn định so với hiệu quả dữ liệu. Các thuật toán đúng chính sách có xu hướng ổn định hơn nhưng đói dữ liệu, trong khi các thuật toán ngoài chính sách có xu hướng ngược lại.
+Khám phá so với Khai thác: Khám phá và khai thác là một thách thức quan trọng trong RL. Một thuật toán nên khai thác thông tin đã biết từ những trải nghiệm trước đó để đạt được phần thưởng tích lũy cao hơn, nhưng nó cũng cần khám phá để có được những trải nghiệm mới có thể được sử dụng để tìm ra chính sách tối ưu trong tương lai. Khi một chính sách được đào tạo qua nhiều lần lặp lại và tìm hiểu thêm về môi trường, chính sách đó trở nên chắc chắn hơn về việc lựa chọn hành động cho một quan sát nhất định. Tuy nhiên, nếu chính sách không đủ khám phá, nó có thể sẽ bám vào thông tin đã được học ngay cả khi nó không ở mức tối ưu. Thuật toán PPO khuyến khích thăm dò bằng cách sử dụng chính quy hóa entropy, điều này ngăn cản các tác nhân hội tụ đến optima cục bộ. Thuật toán SAC đạt được sự cân bằng đặc biệt giữa thăm dò và khai thác bằng cách thêm entropy vào mục tiêu tối đa hóa của nó.
+Sự hỗn loạn:
+ + Trong ngữ cảnh này, 'entropy' là thước đo độ không chắc chắn trong chính sách, vì vậy nó có thể được hiểu là thước đo mức độ tin cậy của một chính sách khi lựa chọn hành động cho một trạng thái nhất định. Chính sách có entropy thấp rất tự tin trong việc lựa chọn hành động, trong khi chính sách có entropy cao không chắc chắn về việc chọn hành động nào.
+ + Chiến lược tối đa hóa entropy của thuật toán SAC có những lợi thế tương tự như việc sử dụng entropy của thuật toán PPO làm bộ điều chỉnh. Giống như PPO, nó khuyến khích khám phá rộng hơn và tránh sự hội tụ đến một điểm tối ưu cục bộ xấu bằng cách khuyến khích tác nhân chọn một hành động có entropy cao hơn. Không giống như điều hòa entropy, tối đa hóa entropy có một lợi thế duy nhất. Nó có xu hướng từ bỏ các chính sách chọn hành vi không thỏa hiệp, đó là một lý do khác khiến thuật toán SAC có xu hướng tiết kiệm dữ liệu hơn PPO.
+ + Điều chỉnh lượng entropy trong SAC bằng cách sử dụng siêu thông số SAC alpha. Giá trị entropy SAC alpha tối đa (1,0) cho phép thăm dò. Giá trị tối thiểu (0,0) khôi phục mục tiêu RL tiêu chuẩn và vô hiệu hóa phần thưởng
+entropy khuyến khích thăm dò. Giá trị alpha SAC tốt để bắt đầu thử nghiệm là 0,5. Điều chỉnh phù hợp khi bạn lặp lại trên các mô hình của mình.
+	Hãy thử cả thuật toán PPO và SAC, thử nghiệm với siêu tham số của chúng và khám phá chúng với mỗi lần huấn luyện mô hình.
++ Proximal Policy Optimization: Thuật toán độ dốc chính sách tiên tiến nhất sử dụng hai mạng thần kinh trong quá trình đào tạo – mạng chính sách và mạng giá trị.
+
+<img src="img/13.2.2.png">
+
+
+<img src="img/13.2.2.png">
+
+<img src="img/14.2.2.png">
+
+<img src="img/15.2.2.png">
+
+<img src="img/16.2.2.png">
+
+
+<img src="img/17.2.2.png">
+
+<img src="img/18.2.2.png">
+
+<img src="img/19.2.2.png">
+
+<img src="img/20.2.2.png">
+
+
+<img src="img/21.2.2.png">
+
+<img src="img/22.2.2.png">
+
+<img src="img/23.2.2.png">
+
+
+<img src="img/24.2.2.png">
+
+<img src="img/25.2.2.png">
+
+<img src="img/26.2.2.png">
+
+<img src="img/27.2.2.png">
+
+<img src="img/28.2.2.png">
+
+<img src="img/29.2.2.png">
+
+<img src="img/30.2.2.png">
+
+<img src="img/31.2.2.png">
+
+
+<img src="img/32.2.2.png">
+
+
+<img src="img/33.2.2.png">
 
 
 
 
 
-## 2.2/Cấu hình model ?
+
+
+
+
+
+
+
+
 
 ## 2.3/Một số thuật toán  traiing  đã cải tiến ?
 
