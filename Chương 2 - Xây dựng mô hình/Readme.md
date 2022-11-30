@@ -76,12 +76,18 @@ Thuật toán đào tạo và siêu tham số
 
 +  PPO: Thuật toán tối ưu hóa với policy gần.
 + SAC: Thuật toán tối ưu với policy ngẫu nhiên
+
 So sánh giữa hai thuật toán huấn luyện:
-Proximal Policy Optimization	Soft Actor Critic
-Hoạt động trong cả không gian hành động rời rạc và liên tục.	Hoạt động trong không gian hành
-động liên tục.
-Học từ những lần thử bây giờ	Học từ những quan lỗi của mô hình trước.
-Sử dụng regularization.	hêm entropy vào mục tiêu tối đa.
+
+-Proximal Policy Optimization:
++ Hoạt động trong cả không gian hành động rời rạc và liên tục.
++ Học từ những lần thử bây giờ.
++ Sử dụng regularization.
+
+-Soft Actor Critic:
++ Hoạt động trong không gian hành động liên tục.
++ Học từ những quan lỗi của mô hình trước.
++ Thêm entropy vào mục tiêu tối đa.
 
 Ổn định (dữ liệu liên tục) so với Đói dữ liệu (dữ liệu rời rạc): Thông tin học được bởi các chính sách của thuật toán PPO và SAC trong khi khám phá một môi trường được sử dụng theo cách khác nhau. PPO sử dụng phương pháp học tập theo chính sách có nghĩa là nó học được chức năng giá trị của mình từ những quan sát được thực hiện bởi chính sách hiện tại khám phá môi trường. SAC sử dụng phương pháp học tập ngoài chính sách có nghĩa là nó có thể sử dụng các quan sát được thực hiện bởi quá trình thăm dò môi trường của các chính sách trước đó. Sự cân bằng giữa việc học tập chính sách và học tập đúng chính sách thường là tính ổn định so với hiệu quả dữ liệu. Các thuật toán đúng chính sách có xu hướng ổn định hơn nhưng đói dữ liệu, trong khi các thuật toán ngoài chính sách có xu hướng ngược lại.
 Khám phá so với Khai thác: Khám phá và khai thác là một thách thức quan trọng trong RL. Một thuật toán nên khai thác thông tin đã biết từ những trải nghiệm trước đó để đạt được phần thưởng tích lũy cao hơn, nhưng nó cũng cần khám phá để có được những trải nghiệm mới có thể được sử dụng để tìm ra chính sách tối ưu trong tương lai. Khi một chính sách được đào tạo qua nhiều lần lặp lại và tìm hiểu thêm về môi trường, chính sách đó trở nên chắc chắn hơn về việc lựa chọn hành động cho một quan sát nhất định. Tuy nhiên, nếu chính sách không đủ khám phá, nó có thể sẽ bám vào thông tin đã được học ngay cả khi nó không ở mức tối ưu. Thuật toán PPO khuyến khích thăm dò bằng cách sử dụng chính quy hóa entropy, điều này ngăn cản các tác nhân hội tụ đến optima cục bộ. Thuật toán SAC đạt được sự cân bằng đặc biệt giữa thăm dò và khai thác bằng cách thêm entropy vào mục tiêu tối đa hóa của nó.
@@ -168,15 +174,18 @@ xung quanh đường đua, sử dụng ba điểm đánh dấu, sau đó tiến 
 
 
 Hàm phần thưởng AWS DeepRacer lấy một đối tượng từ điển làm đầu vào.
+
 def reward_function(params) :
     
     reward = ...
 
     return float(reward)
 
+
 Đối tượng từ điển params chứa các cặp khóa-giá trị sau:
 
 {
+
     "all_wheels_on_track": Boolean,        # cờ để cho biết liệu xe có đang đi đúng hướng hay không
 
     "x": float,                            # tọa độ x của đại lý tính bằng mét
@@ -228,6 +237,7 @@ def reward_function(params) :
 Ví dụ : Hàm phần thưởng sử dụng thông số recent_waypoints.
 
 Hàm phần thưởng ví dụ sau minh họa cách sử dụng điểm tham chiếu và điểm_điểm gần nhất cũng như tiêu đề để tính toán phần thưởng ngay lập tức.
+
 
 def reward_function(params):
     
