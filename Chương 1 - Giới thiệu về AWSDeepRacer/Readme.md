@@ -73,7 +73,7 @@
 -	Trong quá trình học tăng cường, một agent, chẳng hạn như xe AWS DeepRacer thực hoặc ảo, với mục tiêu đạt được mục tiêu đã định sẽ tương tác với một environment để tối đa hóa tổng phần thưởng của agent. Agent thực hiện một hành động , được hướng dẫn bởi một chiến lược được gọi là policy , tại một trạng thái môi trường nhất định và đạt đến một trạng thái mới. Có một phần thưởng ngay lập tức liên quan đến bất kỳ hành động nào. Phần thưởng là thước đo mức độ mong muốn của hành động. Phần thưởng ngay lập tức này được coi là do môi trường trả lại.
 -	Mục tiêu của quá trình học tăng cường trong AWS DeepRacer là tìm hiểu chính sách tối ưu trong một môi trường nhất định. Học tập là một quá trình lặp đi lặp lại các thử nghiệm và sai sót. Tác nhân thực hiện hành động ban đầu ngẫu nhiên để đến một trạng thái mới. Sau đó, tác nhân lặp lại bước từ trạng thái mới sang trạng thái tiếp theo. Theo thời gian, đại lý phát hiện ra các hành động dẫn đến phần thưởng dài hạn tối đa. Sự tương tác của tác nhân từ trạng thái ban đầu đến trạng thái kết thúc được gọi là một episode.
 
-## 1.7/Một số các cuộc thi năm 2022
+## 1.7/Cuộc thi
 -	AWS DeepRacer League là giải đua xe tự lái toàn cầu đầu tiên trên thế giới dành cho các nhà phát triển. Xây dựng các mô hình máy học AWS DeepRacer và cạnh tranh trong giải vô địch toàn cầu, chạy đua giành giải thưởng, vinh quang và cơ hội nâng cao Cúp vô địch.
 <img src = "https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%201%20-%20Gi%E1%BB%9Bi%20thi%E1%BB%87u%20v%E1%BB%81%20AWSDeepRacer/img/cuocthi.jfif" >
 
