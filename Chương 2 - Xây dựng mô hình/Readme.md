@@ -344,7 +344,9 @@ Sau khi hoàn thành tất cả thì ta chọn Start evaluation để tiến hà
 
 
 ## 2.4/Cách đánh giá hiệu suất model ?
-
+ -Một công việc đào tạo là tốt nếu phần thưởng trung bình và hoàn thành theo dõi cho thấy các xu hướng hội tụ.
+ -Đặc biệt, mô hình có khả năng hội tụ nếu tiến độ mỗi tập liên tục đạt 100% và hết mức thưởng.
+ - Nếu không, hãy sao chép mô hình và đào tạo lại.
 ## 2.5/Các yếu tố ảnh hưởng  đến hiệu suất model ?
  - Thời gian  gian train.
  - Thuật toán thưởng.
