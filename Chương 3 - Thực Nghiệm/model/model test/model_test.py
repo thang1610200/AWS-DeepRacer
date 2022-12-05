@@ -15,7 +15,7 @@ def reward_function(params):
     steering_angle = params['steering_angle']   # Góc lái của xe (độ)
     #track_width = params['track_width'] #chiều rộng của đường đua
     #waypoints = params['waypoints'] #Tọa độ (x,y) dọc theo trung tâm của đường đua
-    #closest_waypoints = params['closest_waypoints'] #chỉ số của hai điểm waypoint gần xe nhất
+    #closest_waypoints = params['closest_waypoints'] #chỉ số của hai điểm tham chiếu gần xe nhất
 
     reward = 0
 
