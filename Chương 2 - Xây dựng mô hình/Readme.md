@@ -343,12 +343,13 @@ Sau khi hoàn thành tất cả thì ta chọn Start evaluation để tiến hà
 
 
 
-## 2.3/Một số thuật toán  traiing  đã cải tiến ?
-
 ## 2.4/Cách đánh giá hiệu suất model ?
 
 ## 2.5/Các yếu tố ảnh hưởng  đến hiệu suất model ?
-
+ - Thời gian  gian train.
+ - Thuật toán thưởng.
+ - Địa hình  đường đua , cấu hình setup đường đua .
+ -  Thông số setup model như tốc độ min , max, góc lái ,..
 ## 2.6/Quy trình xây dựng  model ?
 Để đánh giá một mô hình được đào tạo trong bảng điều khiển AWS DeepRacer
 ### B1/ Từ ngăn điều hướng chính, chọn   Your Model rồi chọn mô hình bạn vừa đào tạo từ danh sách Mô hình để mở trang chi tiết mô hình.
