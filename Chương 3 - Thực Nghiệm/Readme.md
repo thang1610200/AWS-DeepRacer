@@ -1,7 +1,6 @@
 # THỰC NGHIỆM
 ## 3.1/ Một số thành tích nhóm  đạt được 
 
-
 <img src="img/225.jpg">
 <img src="img/531.jpg">
 <img src="img/1022.jpg">
