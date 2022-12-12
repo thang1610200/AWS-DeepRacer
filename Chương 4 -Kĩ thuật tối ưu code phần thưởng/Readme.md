@@ -1,32 +1,51 @@
 # Chương 4 - Kĩ thuật tối ưu code phần thưởng
 ## 4.1/Input Parameters of the AWS DeepRacer Reward Function
 {
- "all_wheels_on_track" : Boolean , # cờ để cho biết tác nhân có đang trên đường đi
- "x" : float , # tọa độ x của tác nhân tính bằng mét
- "y" : float , # tọa độ y của tác nhân tính bằng mét
- "closest_objects" : [ int , int ], # chỉ số dựa trên số 0 của hai đối tượng gần nhất với vị trí hiện tại của tác nhân là (x, y).
- "closest_waypoints" : [ int , int ], # chỉ số của hai điểm tham chiếu gần nhất.
- "khoảng_cách_từ_trung_tâm" : # khoảng cách tính bằng mét từ trung tâm đường đua
- "is_crashed" : Boolean , # Boolean cờ để cho biết tác nhân có bị rơi
-hay không.
- "is_left_of_center" : Boolean , # Gắn cờ để cho biết nhân viên hỗ trợ có ở
-bên trái trung tâm đường đua hay không.
- "is_offtrack" : Boolean , # Boolean cờ để cho biết tác nhân có đi chệ
-ch hướng hay không.
- "is_reversed" : Boolean , cờ # để cho biết tác nhân đang lái theo chiều kim đồng hồ (Đúng) hay ngược chiều kim đồng hồ (Sai).
- "heading" : float , # đặc vụ ngáp theo độ
- "objects_ distance" [ float , ], # danh sách khoảng cách của các đối tượng tính bằng mét giữa 0 và track_length liên quan đến vạch xuất phát.
- "objects_heading" : [ float , ], # danh sách các tiêu đề của đối tượng theo độ từ -180 đến 180.
- "objects_left_of_center" : [ Boolean , ], # danh sách các cờ Boolean cho biết đối tượng của các phần tử có nằm bên trái tâm hay không (Đúng ) hay không (Sai).
- "objects_location" : [( float , float ),], # danh sách vị trí đối tượng [(x,y),...].
- "đối tượng_tốc độ" : ], # danh sách tốc độ của các đối tượng tính bằng mét trên giây.
- "progress" : float , # phần trăm đường đua đã hoàn thành
- "speed" : float , # tốc độ của tác nhân tính bằng mét trên giây (m/s)
- "steering_angle" : float , # góc lái của tác nhân tính theo độ
- "steps" : int , # số bước đã hoàn thành
- "track_length" : float , # chiều dài theo dõi tính bằng mét.
- "track_width" : float , # chiều rộng của rãnh
- "waypoints" : ), ] # danh sách (x,y) là cột mốc dọc theo trung tâm đường đua
+ + "all_wheels_on_track" : Boolean , # cờ để cho biết tác nhân có đang trên đường đi
+
+ + "x" : float , : tọa độ x của tác nhân tính bằng mét
+
+ + "y" : float , : tọa độ y của tác nhân tính bằng mét
+
+ + "closest_objects" : [ int , int ], : chỉ số dựa trên số 0 của hai đối tượng gần nhất với vị trí hiện tại của tác nhân là (x, y).
+
+ + "closest_waypoints" : [ int , int ], : chỉ số của hai điểm tham chiếu gần nhất.
+
+ + "khoảng_cách_từ_trung_tâm" :  khoảng cách tính bằng mét từ trung tâm đường đua
+
+ + "is_crashed" : Boolean , :  Boolean cờ để cho biết tác nhân có bị rơi hay không.
+
+ + "is_left_of_center" : Boolean , :  Gắn cờ để cho biết nhân viên hỗ trợ có ở bên trái trung tâm đường đua hay không.
+
+ + "is_offtrack" : Boolean , : Boolean cờ để cho biết tác nhân có đi chệch hướng hay không.
+
+ + "is_reversed" : Boolean , cờ : để cho biết tác nhân đang lái theo chiều kim đồng hồ (Đúng) hay ngược chiều kim đồng hồ (Sai).
+
+ + "heading" : float , :  đặc vụ ngáp theo độ
+ 
+ + "objects_ distance" [ float , ], :  danh sách khoảng cách của các đối tượng tính bằng mét giữa 0 và track_length liên quan đến vạch xuất phát.
+
+ + "objects_heading" : [ float , ], : danh sách các tiêu đề của đối tượng theo độ từ -180 đến 180.
+
+ + "objects_left_of_center" : [ Boolean , ], : danh sách các cờ Boolean cho biết đối tượng của các phần tử có nằm bên trái tâm hay không (Đúng ) hay không (Sai).
+
+ + "objects_location" : [( float , float ),], # danh sách vị trí đối tượng [(x,y),...].
+
+ + "đối tượng_tốc độ" : ], : danh sách tốc độ của các đối tượng tính bằng mét trên giây.
+ 
+ + "progress" : float , : phần trăm đường đua đã hoàn thành
+
+
+ + "speed" : float , : tốc độ của tác nhân tính bằng mét trên giây (m/s)
+
+ + "steering_angle" : float , : góc lái của tác nhân tính theo độ
+
+ + "steps" : int , : số bước đã hoàn thành
+
+ + "track_length" : float , : chiều dài theo dõi tính bằng mét.
+
+ + "track_width" : float , : chiều rộng của rãnh
+ 
 }
 ## 4.2/ Hyperparameters
 
