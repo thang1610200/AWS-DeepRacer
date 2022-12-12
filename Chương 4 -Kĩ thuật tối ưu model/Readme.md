@@ -200,3 +200,4 @@ def reward_function(params):
     // the two aspects above
     reward += 1.0 * reward_lane + 4.0 * reward_avoid
     return reward
+## 4.6/Một số model trainng có hiệu suất tốt
