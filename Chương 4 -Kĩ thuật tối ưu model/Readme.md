@@ -90,44 +90,44 @@ Kích thước của bộ đệm trải nghiệm được sử dụng để lấ
 ## 4.4/Log Analysis 
 
 ## 4.5/ Một số code  phần thưởng tối ưu :
-### Example 1: Follow the Center Line in Time Trials
-def reward_function(params):
- '''
- Example of rewarding the agent to follow center line
- '''
-
- //Read input parameters
- track_width = params['track_width']
- distance_from_center = params['distance_from_center']
- //Calculate 3 markers that are increasingly further away from the center line
- marker_1 = 0.1 * track_width
- marker_2 = 0.25 * track_width
- marker_3 = 0.5 * track_width
- // Give higher reward if the car is closer to center line and vice versa
- if distance_from_center <= marker_1:
- reward = 1
- elif distance_from_center <= marker_2:
- reward = 0.5
- elif distance_from_center <= marker_3:
- reward = 0.1
- else:
- reward = 1e-3 # likely crashed/ close to off track
- return reward
-### Example 2: Stay Inside the Two Borders in Time Trials
+### Example 1: Đi theo đường trung tâm trong thử nghiệm thời gian
     def reward_function(params):
     '''
-    Example of rewarding the agent to stay inside the two borders of the track
+   Ví dụ về thưởng đi theo đường trung tâm
     '''
 
-    // Read input parameters
+    //Đọc thông số đầu vào
+    track_width = params['track_width']
+    distance_from_center = params['distance_from_center']
+    //Tính 3 điểm đánh dấu ngày càng xa đường trung tâm
+    marker_1 = 0.1 * track_width
+    marker_2 = 0.25 * track_width
+    marker_3 = 0.5 * track_width
+    //Thưởng cao hơn nếu xe càng gần đường trung tâm và ngược lại
+    if distance_from_center <= marker_1:
+    reward = 1
+    elif distance_from_center <= marker_2:
+    reward = 0.5
+    elif distance_from_center <= marker_3:
+    reward = 0.1
+    else:
+    reward = 1e-3 # likely crashed/ close to off track
+    return reward
+### Example 2: Ở bên trong hai biên giới trong thử nghiệm thời gian
+    def reward_function(params):
+    '''
+    Ví dụ về phần thưởng cho đại lý ở bên trong hai đường viền của đường đua
+    '''
+
+    // Đọc tham số đầu vào
     all_wheels_on_track = params['all_wheels_on_track']
     distance_from_center = params['distance_from_center']
     track_width = params['track_width']
 
-    // Give a very low reward by default
+    // Đưa ra phần thưởng rất thấp theo mặc định
     reward = 1e-3
-    // Give a high reward if no wheels go off the track and
-    // the car is somewhere in between the track borders
+    // Trao phần thưởng cao nếu không có bánh nào chệch khỏi đường ray và
+    // chiếc xe ở đâu đó giữa các đường viền
     if all_wheels_on_track and (0.5*track_width - distance_from_center) >= 0.05:
     reward = 1.0
     // Always return a float value
@@ -135,18 +135,18 @@ def reward_function(params):
 ### Example 3: Prevent Zig-Zag in Time Trials
     def reward_function(params):
     '''
-    Example of penalize steering, which helps mitigate zig-zag behaviors
+    Ví dụ về chỉ đạo phạt, giúp giảm thiểu các hành vi sai
     '''
 
-    // Read input parameters
+    // Đọc tham số đầu vào
     distance_from_center = params['distance_from_center']
     track_width = params['track_width']
-    steering = abs(params['steering_angle']) # Only need the absolute steering angle
-    // Calculate 3 marks that are farther and father away from the center line
+    steering = abs(params['steering_angle']) # Chỉ cần góc lái tuyệt đối
+    // Tính 3 điểm xa hơn và cha xa trung tâm hơn
     marker_1 = 0.1 * track_width
     marker_2 = 0.25 * track_width
     marker_3 = 0.5 * track_width
-    // Give higher reward if the car is closer to center line and vice versa
+    // Phần thưởng cao hơn nếu xe càng gần đường trung tâm và ngược lại
     if distance_from_center <= marker_1:
     reward = 1.0
     elif distance_from_center <= marker_2:
@@ -155,17 +155,17 @@ def reward_function(params):
     reward = 0.1
     else:
     reward = 1e-3 # likely crashed/ close to off track
-    // Steering penality threshold, change the number based on your action space setting
+    // Ngưỡng phạt lái, thay đổi số dựa trên cài đặt không gian hành động của bạn
     ABS_STEERING_THRESHOLD = 15
-    // Penalize reward if the car is steering too much
+    // Thưởng phạt nếu xe bẻ lái quá nhiều
     if steering > ABS_STEERING_THRESHOLD:
     reward *= 0.8
     return float(reward)
-### Example 4: Stay On One Lane without Crashing into Stationary Obstacles or Moving Vehicles
+### Example 4: Đi trên một làn đường mà không đâm vào chướng ngại vật cố định hoặc phương tiện đang di chuyển
     def reward_function(params):
     '''
-    Example of rewarding the agent to stay inside two borders
-    and penalizing getting too close to the objects in front
+    Ví dụ về thưởng cho đại lý ở bên trong hai biên giới
+    và xử phạt khi đến quá gần các đối tượng phía trước
     '''
     all_wheels_on_track = params['all_wheels_on_track']
     distance_from_center = params['distance_from_center']
@@ -174,19 +174,20 @@ def reward_function(params):
     _, next_object_index = params['closest_objects']
     objects_left_of_center = params['objects_left_of_center']
     is_left_of_center = params['is_left_of_center']
-    // Initialize reward with a small number but not zero
-    //because zero means off-track or crashed
+    // Khởi tạo phần thưởng với một số nhỏ nhưng không phải bằng không
+    //vì số không có nghĩa là lạc đường hoặc bị hỏng
     reward = 1e-3
-    // Reward if the agent stays inside the two borders of the track
+    // Phần thưởng nếu đại lý ở bên trong hai đường viền của đường đua
     if all_wheels_on_track and (0.5 * track_width - distance_from_center) >= 0.05:
     reward_lane = 1.0
     else:
     reward_lane = 1e-3
-    // Penalize if the agent is too close to the next object
+    
+    // Phạt nếu tác tử ở quá gần đối tượng tiếp theo
     reward_avoid = 1.0
-    // Distance to the next object
+    // Khoảng cách đến đối tượng tiếp theo
     distance_closest_object = objects_distance[next_object_index]
-    // Decide if the agent and the next object is on the same lane
+    // Quyết định xem tác nhân và đối tượng tiếp theo có trên cùng một làn không
     is_same_lane = objects_left_of_center[next_object_index] == is_left_of_center
 
     if is_same_lane:
@@ -196,8 +197,164 @@ def reward_function(params):
     reward_avoid *= 0.2
     elif distance_closest_object < 0.3:
     reward_avoid = 1e-3 # Likely crashed
-    //Calculate reward by putting different weights on
-    // the two aspects above
+    / Tính toán phần thưởng bằng cách đặt các trọng số khác nhau
+    // hai khía cạnh trên
     reward += 1.0 * reward_lane + 4.0 * reward_avoid
     return reward
 ## 4.6/Một số model trainng có hiệu suất tốt
+### EX1:
+ <img src="img/r1.png">
+    def reward_function(params):
+
+    """
+     Xác định chức năng khen thưởng dựa trên kế hoạch
+     Chức năng này chỉ định ba cách để kiểm tra xem chúng ta nên thưởng hay phạt tác nhân đó. Đầu tiên, nó sẽ kiểm tra xem tất cả các bánh xe có đi đúng hướng hay không. Đại lý sẽ nhận được nhiều phần thưởng hơn bằng cách ở trong đường đua. Bất cứ khi nào bất kỳ bánh xe nào bị chệch hướng,  sẽ bị phạt 10 điểm. 
+
+    Thứ hai, nó sẽ kiểm tra vị trí của tác nhân dựa trên các điểm tham chiếu. Vì đường dẫn mong muốn được chỉ định, đặt các thuộc tính của hàm phần thưởng. Đầu tiên,  chia các điểm tham chiếu thành ba mảng, trái, phải và trung tâm, dựa trên đường dẫn mong muốn. Sau khi đặt tất cả các điểm vào ba mảng này, chúng tôi xác định phần thưởng như sau:
+    """
+    center_variance = params["distance_from_center"] / params["track_width"]
+
+    #racing line
+
+    left_lane = [23,24,50,51,52,53,61,62,63,64,65,66,67,68]#Fill in the waypoints
+
+   
+
+    center_lane = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,25,26,27,28,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,54,55,56,57,58,59,60,69,70]#Fill in the waypoints
+
+   
+
+    right_lane = [29,30,31,32,33,34]#Fill in the waypoints
+
+   
+
+    #Speed :  kiểm tra tốc độ của tác nhân dựa trên các điểm tham chiếu
+
+    fast = [0,1,2,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,51,52,53,54,61,62,63,64,65,66,67,68,69,70] #3
+
+    moderate = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,55,56,57,58,59,60] #2
+
+    slow = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24] #1
+
+ 
+
+    reward = 30
+
+ 
+
+    if params["all_wheels_on_track"]:
+
+        reward += 10
+
+    else:
+
+        reward -= 10
+
+ 
+
+    if params["closest_waypoints"][1] in left_lane and params["is_left_of_center"]:
+
+        reward += 10
+
+    elif params["closest_waypoints"][1] in right_lane and not params["is_left_of_center"]:
+
+        reward += 10
+
+    elif params["closest_waypoints"][1] in center_lane and center_variance < 0.4:
+
+        reward += 10
+
+    else:
+
+        reward -= 10
+
+       
+
+    if params["closest_waypoints"][1] in fast:
+
+        if params["speed"] > 1.5 :
+
+            reward += 10
+
+        else:
+
+            reward -= 10
+
+    elif params["closest_waypoints"][1] in moderate:
+
+        if params["speed"] > 1 and params["speed"] <= 1.5 :
+
+            reward += 10
+
+        else:
+
+            reward -= 10
+
+    elif params["closest_waypoints"][1] in slow:
+
+        if params["speed"] <= 1 :
+
+            reward += 10
+
+        else:
+
+            reward -= 10
+
+       
+
+   
+
+    return float(reward)
+
+### EX2: 
+import math
+
+def reward_function(params):  
+
+
+    # Đọc các biến đầu vào
+
+    waypoints = params['waypoints']
+
+    closest_waypoints = params['closest_waypoints']
+
+    heading = params['heading']
+
+ 
+
+    # Khởi tạo phần thưởng với giá trị điển hình
+
+    reward = 1.0
+
+    # Tính hướng của đường trung tâm dựa trên
+
+    next_point = waypoints[closest_waypoints[1]]
+
+    prev_point = waypoints[closest_waypoints[0]]
+
+    # tính hướng  radius, arctan2(dy, dx), 
+
+    track_direction = math.atan2(next_point[1] - prev_point[1], next_point[0] - prev_point[0])
+
+    # Chuyển  to degree
+
+    track_direction = math.degrees(track_direction)
+
+    # Tính độ lệch giữa hướng theo dõi và hướng đi của ô tô
+
+    direction_diff = abs(track_direction - heading)
+
+    if direction_diff > 180:
+
+        direction_diff = 360 - direction_diff
+
+    # Phạt thưởng nếu chênh lệch quá lớn
+
+    DIRECTION_THRESHOLD = 10.0
+
+    if direction_diff > DIRECTION_THRESHOLD:
+
+        reward *= 0.5
+
+    return float(reward)
+
