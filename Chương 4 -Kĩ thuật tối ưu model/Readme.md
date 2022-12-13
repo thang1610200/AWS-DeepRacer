@@ -47,7 +47,7 @@
 
 Siêu tham số là các biến để kiểm soát quá trình đào tạo học tăng cường của bạn. Chúng có thể được điều chỉnh để tối ưu hóa thời gian đào tạo và hiệu suất mô hình của bạn.
 
-Kỹ thuật tối ưu hóa mà AWS Deepracer sử dụng là PPO viết tắt của Proximal Policy Optimization. Để biết thêm về PPO, hãy sử dụng liên kết này PPO/OpenAI
+Kỹ thuật tối ưu hóa mà AWS Deepracer sử dụng là PPO viết tắt của Proximal Policy Optimization. 
 
 Nhìn vào các tham số siêu khác nhau:
 
@@ -304,7 +304,7 @@ Kích thước của bộ đệm trải nghiệm được sử dụng để lấ
 
 ### EX2: 
 <img src="img/K123.png">
-    import math
+     import math
 
     
 
