@@ -83,6 +83,34 @@ Kích thước của bộ đệm trải nghiệm được sử dụng để lấ
 
 ## 4.3/Waypoints Reward Function
 
+Waypoint là gì?
+
+Waypoints (Điểm tham chiếu)  đại diện cho mọi vị trí trên đường đua. Nó có 3 dòng (L = trái, C = giữa và R = phải), chúng cũng có số 0 - 118 (theo hình dưới) trên bản đồ. Đường đua khác nhau sẽ có điểm tham chiếu khác nhau.
+
+<img src="waypoint1.png">
+
+- 2 loại tham số chủ yếu sử dụng trong phần này:
+Ví dụ về Closest_waypoint
+
+<img src="waypoint2.png">
+
+Ví dụ về Heading:
+
+<img src="waypoint3.png">
+
+Thuật toán thưởng về waypoint:
+Thuật toán này sẽ xác định được quãng đường phía trước có khúc cua nào không, nếu có thì sẽ giảm tốc độ, không thì sẽ tăng tốc độ
+
+<img src="waypoint4.png">
+<img src="waypoint5.png">
+<img src="waypoint6.png">
+
+Tiếp theo là 1 số hình ảnh khi thử nghiệm
+
+<img src="waypoint7.png">
+<img src="waypoint8.png">
+<img src="waypoint9.png">
+
 ## 4.4/Log Analysis 
 
 Phân tích nhật ký là gì?
