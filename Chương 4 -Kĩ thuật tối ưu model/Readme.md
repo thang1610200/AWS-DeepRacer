@@ -86,29 +86,29 @@ Waypoint là gì?
 
 Waypoints (Điểm tham chiếu)  đại diện cho mọi vị trí trên đường đua. Nó có 3 dòng (L = trái, C = giữa và R = phải), chúng cũng có số 0 - 118 (theo hình dưới) trên bản đồ. Đường đua khác nhau sẽ có điểm tham chiếu khác nhau.
 
-<img src="waypoint_1.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_1.png">
 
 - 2 loại tham số chủ yếu sử dụng trong phần này:
 Ví dụ về Closest_waypoint
 
-<img src="waypoint_2.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_2.png">
 
 Ví dụ về Heading:
 
-<img src="waypoint_3.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_3.png">
 
 Thuật toán thưởng về waypoint:
 Thuật toán này sẽ xác định được quãng đường phía trước có khúc cua nào không, nếu có thì sẽ giảm tốc độ, không thì sẽ tăng tốc độ
 
-<img src="waypoint_4.png">
-<img src="waypoint_5.png">
-<img src="waypoint_6.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_4.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_5.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_6.png">
 
 Tiếp theo là 1 số hình ảnh khi thử nghiệm
 
-<img src="waypoint_7.png">
-<img src="waypoint_8.png">
-<img src="waypoint_9.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_7.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_8.png">
+<img src="https://github.com/thang1610200/AWS-DeepRacer/blob/main/Ch%C6%B0%C6%A1ng%204%20-K%C4%A9%20thu%E1%BA%ADt%20t%E1%BB%91i%20%C6%B0u%20model/img/waypoint_9.png">
 
 ## 4.4/Log Analysis 
 
