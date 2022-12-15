@@ -11,15 +11,14 @@
  + "closest_waypoints"  [ int , int ] : chỉ số của hai điểm tham chiếu gần nhất.
 
 
- + "is_crashed"  (Boolean) :  Boolean cờ để cho biết tác nhân có bị rơi hay không.
+ + "is_crashed"  (Boolean) :  Boolean cờ để cho biết có bị rơi hay không.
 
- + "is_left_of_center" (Boolean)   :  Gắn cờ để cho biết nhân viên hỗ trợ có ở bên trái trung tâm đường đua hay không.
+ + "is_left_of_center" (Boolean)   :  Gắn cờ để cho biết  hỗ trợ có ở bên trái trung tâm đường đua hay không.
 
- + "is_offtrack"  (Boolean)  : Boolean cờ để cho biết tác nhân có đi chệch hướng hay không.
+ + "is_offtrack"  (Boolean)  : Boolean cờ để cho biết  có đi chệch hướng hay không.
 
- + "is_reversed" (Boolean)  : để cho biết tác nhân đang lái theo chiều kim đồng hồ (Đúng) hay ngược chiều kim đồng hồ (Sai).
+ + "is_reversed" (Boolean)  : để cho biết  đang lái theo chiều kim đồng hồ (Đúng) hay ngược chiều kim đồng hồ (Sai).
 
- + "heading" (float) :  đặc vụ ngáp theo độ
  
  + "objects_ distance" ([ float , ]) :  danh sách khoảng cách của các đối tượng tính bằng mét giữa 0 và track_length liên quan đến vạch xuất phát.
 
@@ -392,35 +391,31 @@ Khi không cần sổ ghi chép hoặc dữ liệu nữa, bạn có thể xóa v
  <img src="img/r1.png">
     def reward_function(params):
 
-    """
-     Xác định chức năng khen thưởng dựa trên kế hoạch
-     Chức năng này chỉ định ba cách để kiểm tra xem chúng ta nên thưởng hay phạt tác nhân đó. Đầu tiên, nó sẽ kiểm tra xem tất cả các bánh xe có đi đúng hướng hay không. Đại lý sẽ nhận được nhiều phần thưởng hơn bằng cách ở trong đường đua. Bất cứ khi nào bất kỳ bánh xe nào bị chệch hướng,  sẽ bị phạt 10 điểm. 
+ 
 
-    Thứ hai, nó sẽ kiểm tra vị trí của tác nhân dựa trên các điểm tham chiếu. Vì đường dẫn mong muốn được chỉ định, đặt các thuộc tính của hàm phần thưởng. Đầu tiên,  chia các điểm tham chiếu thành ba mảng, trái, phải và trung tâm, dựa trên đường dẫn mong muốn. Sau khi đặt tất cả các điểm vào ba mảng này, chúng tôi xác định phần thưởng như sau:
-    """
-    center_variance = params["distance_from_center"] / params["track_width"]
+    center_variance = params["distance_from_center"] / params["track_width"] #trung tâm _ phương sai = khoảng cách từ trung tâm/theo dõi _ chiều rộng
 
-    #racing line
+    #đường đua
 
-    left_lane = [23,24,50,51,52,53,61,62,63,64,65,66,67,68]#Fill in the waypoints
+    left_lane = [23,24,50,51,52,53,61,62,63,64,65,66,67,68]#Điền vào các điểm tham chiếu-làn đường bên trái
 
    
 
-    center_lane = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,25,26,27,28,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,54,55,56,57,58,59,60,69,70]#Fill in the waypoints
+    center_lane = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,25,26,27,28,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,54,55,56,57,58,59,60,69,70]#Điền vào các điểm tham chiếu-làn đường trung tâm
 
    
 
-    right_lane = [29,30,31,32,33,34]#Fill in the waypoints
+    right_lane = [29,30,31,32,33,34]#Điền vào các điểm tham chiếu-làn đường bên phải
 
    
 
-    #Speed :  kiểm tra tốc độ của tác nhân dựa trên các điểm tham chiếu
+    #Tốc độ, vận tốc
 
-    fast = [0,1,2,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,51,52,53,54,61,62,63,64,65,66,67,68,69,70] #3
+    fast = [0,1,2,3,4,5,6,7,8,9,25,26,27,28,29,30,31,32,51,52,53,54,61,62,63,64,65,66,67,68,69,70] #3Nhanh
 
-    moderate = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,55,56,57,58,59,60] #2
+    moderate = [33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,55,56,57,58,59,60] #2vừa phải
 
-    slow = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24] #1
+    slow = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24] #1chậm
 
  
 
@@ -428,7 +423,7 @@ Khi không cần sổ ghi chép hoặc dữ liệu nữa, bạn có thể xóa v
 
  
 
-    if params["all_wheels_on_track"]:
+    if params["all_wheels_on_track"]: #tất cả _ bánh _ trên _ đường
 
         reward += 10
 
@@ -438,7 +433,7 @@ Khi không cần sổ ghi chép hoặc dữ liệu nữa, bạn có thể xóa v
 
  
 
-    if params["closest_waypoints"][1] in left_lane and params["is_left_of_center"]:
+    if params["closest_waypoints"][1] in left_lane and params["is_left_of_center"]: #điểm tham chiếu gần nhất    -   bên trái _ của _ chính giữa
 
         reward += 10
 
@@ -491,6 +486,7 @@ Khi không cần sổ ghi chép hoặc dữ liệu nữa, bạn có thể xóa v
    
 
     return float(reward)
+    
 
 ### EX2: 
 <img src="img/K123.png">
@@ -501,7 +497,7 @@ Khi không cần sổ ghi chép hoặc dữ liệu nữa, bạn có thể xóa v
     def reward_function(params):  
 
 
-        # Read input variables
+        # Đọc các biến đầu vào
 
         waypoints = params['waypoints']
 
@@ -511,25 +507,25 @@ Khi không cần sổ ghi chép hoặc dữ liệu nữa, bạn có thể xóa v
 
     
 
-        # Initialize the reward with typical value
+        # Khởi tạo phần thưởng với giá trị mặc định
 
         reward = 1.0
 
-        # Calculate the direction of the center line based 
+        # Tính hướng của đường trung tâm dựa trên
 
         next_point = waypoints[closest_waypoints[1]]
 
         prev_point = waypoints[closest_waypoints[0]]
 
-        # Calculate the direction in radius, arctan2(dy, dx), 
+        # Tính hướng  radius, arctan2(dy, dx), 
 
         track_direction = math.atan2(next_point[1] - prev_point[1], next_point[0] - prev_point[0])
 
-        # Convert to degree
+        # Chuyển sang degree
 
         track_direction = math.degrees(track_direction)
 
-        # Calculate the difference between the track direction and the heading direction of the car
+        # Tính độ lệch giữa hướng theo dõi và hướng đi của ô tô
 
         direction_diff = abs(track_direction - heading)
 
@@ -537,7 +533,7 @@ Khi không cần sổ ghi chép hoặc dữ liệu nữa, bạn có thể xóa v
 
             direction_diff = 360 - direction_diff
 
-        # Penalize the reward if the difference is too large
+        # Phạt thưởng nếu chênh lệch quá lớn
 
         DIRECTION_THRESHOLD = 10.0
 
