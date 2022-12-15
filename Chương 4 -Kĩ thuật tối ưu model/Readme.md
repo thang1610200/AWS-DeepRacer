@@ -85,6 +85,196 @@ Kích thước của bộ đệm trải nghiệm được sử dụng để lấ
 
 ## 4.4/Log Analysis 
 
+Phân tích nhật ký là gì?
+
+Phân tích nhật ký đang sử dụng sổ ghi chép Jupyter để phân tích và gỡ lỗi các mô hình dựa trên dữ liệu nhật ký được tạo từ môi trường đào tạo và mô phỏng AWS DeepRacer. Với các đoạn mã Python, bạn có thể vẽ biểu đồ và trực quan hóa hiệu suất đào tạo của mô hình thông qua các biểu đồ và bản đồ nhiệt khác nhau. Tôi đã tạo ra một số hình ảnh trực quan độc đáo mà cuối cùng đã giúp tôi huấn luyện một người mẫu đủ nhanh và ổn định để giành chiến thắng trong Cuộc đua F1 ProAm.
+
+<img src="img/1.png">
+
+Hình 1 Trực quan hóa phân tích nhật ký
+
+Trong bài đăng này, tôi chia sẻ một số hình ảnh trực quan hóa mà tôi đã tạo và chỉ ra cách bạn có thể sử dụng Amazon SageMaker để khởi tạo phiên bản sổ ghi chép nhằm thực hiện phân tích nhật ký bằng cách sử dụng dữ liệu đào tạo mô hình DeepRacer.
+
+Nếu bạn đã quen với việc mở sổ ghi chép trong ứng dụng sổ ghi chép JupyterLab, thì bạn chỉ cần sao chép kho lưu trữ phân tích nhật ký của tôi và cuộn xuống phần phân tích nhật ký trong phần Tải xuống nhật ký từ bảng điều khiển AWS DeepRacer của bài đăng này.
+
+Phiên bản sổ ghi chép Amazon SageMaker
+
+Phiên bản sổ ghi chép Amazon SageMaker là phiên bản điện toán ML được quản lý chạy ứng dụng sổ ghi chép Jupyter. Amazon SageMaker quản lý việc tạo phiên bản và các tài nguyên liên quan của nó, vì vậy chúng tôi có thể tập trung vào việc phân tích dữ liệu thu thập được trong quá trình đào tạo mà không phải lo lắng về việc cung cấp trực tiếp Amazon Elastic Compute Cloud (Amazon EC2) hoặc tài nguyên lưu trữ.
+
+Sử dụng phiên bản sổ ghi chép Amazon SageMaker để phân tích nhật ký
+
+Một trong những lợi ích lớn nhất của việc sử dụng phiên bản sổ ghi chép Amazon SageMaker để thực hiện phân tích nhật ký AWS DeepRacer là Amazon SageMaker thay mặt chúng tôi tự động cài đặt các gói và thư viện Anaconda cho các nền tảng deep learning phổ biến, bao gồm cả các thư viện deep learning TensorFlow. Nó cũng tự động đính kèm một ổ lưu trữ ML vào phiên bản sổ ghi chép của chúng tôi, mà chúng tôi có thể sử dụng như một ổ lưu trữ hoạt động liên tục để thực hiện phân tích nhật ký và giữ lại các thành phần phân tích của chúng tôi.
+
+Tạo một phiên bản sổ ghi chép
+
+Để bắt đầu, hãy tạo một phiên bản sổ ghi chép trên bảng điều khiển Amazon SageMaker.
+
+1. Trên bảng điều khiển Amazon SageMaker, trong Notebook , chọn Phiên bản Notebook .
+2. Chọn Tạo phiên bản sổ ghi chép .
+
+<img src="img/Anh2.png">
+
+3. Đối với Tên phiên bản Notebook , hãy nhập tên (ví dụ: DeepRacer-Log-Analysis).
+4. Đối với loại phiên bản Notebook ¸ chọn phiên bản của bạn.
+
+Đối với phân tích nhật ký AWS DeepRacer, loại phiên bản nhỏ nhất (ml.t2.medium) thường là đủ.
+
+5. Đối với Kích thước âm lượng tính bằng GB , hãy nhập kích thước dung lượng lưu trữ của bạn. Đối với bài đăng này, chúng tôi nhập 5.
+
+<img src="img/3.png">
+
+Khi phiên bản sổ ghi chép hiển thị trạng thái InService, chúng tôi có thể mở JupyterLab, IDE dành cho sổ ghi chép Jupyter.
+
+6. Định vị phiên bản sổ ghi chép của bạn và chọn Mở JupyterLab .
+
+<img src="img/4.png">
+
+Nhân bản repo phân tích nhật ký từ JupyterLab
+
+Từ IDE JupyterLab, chúng tôi có thể dễ dàng sao chép kho lưu trữ Git để sử dụng sổ ghi chép phân tích nhật ký do cộng đồng chia sẻ. Ví dụ: tôi có thể sao chép kho lưu trữ phân tích nhật ký của mình sau vài giây, sử dụng https://github.com/TheRayG/deepracer-log-analysis.git làm URI Nhân bản.
+
+<img src="img/5.png">
+
+Sau khi sao chép kho lưu trữ, chúng ta sẽ thấy nó xuất hiện trong cấu trúc thư mục ở bên trái của IDE JupyterLab.
+
+<img src="img/6.png">
+
+Tải nhật ký xuống từ bảng điều khiển AWS DeepRacer
+
+Để chuẩn bị dữ liệu mà chúng tôi muốn phân tích, chúng tôi phải tải nhật ký đào tạo mô hình xuống từ bảng điều khiển AWS DeepRacer.
+
+1. Trên bảng điều khiển AWS DeepRacer, trong Reinforcement learning , chọn Your models .
+2. Chọn mô hình để phân tích.
+3. Trong phần Đào tạo , bên dưới Tài nguyên , chọn Tải xuống Nhật ký .
+
+Thao tác này sẽ tải xuống các tệp nhật ký đào tạo, được đóng gói trong tệp .tar.gz.
+
+<img src="img/7.png">
+
+Trích xuất các tệp nhật ký cần thiết để phân tích
+
+Trong bước này, chúng tôi hoàn thành các cấu hình cuối cùng.
+
+1. Trích xuất các tệp nhật ký RoboMaker và Amazon SageMaker từ gói .tar.gz (có trong thư mục con logs/training/).
+
+<img src="img/8.png">
+
+2. Tải hai tệp nhật ký lên thư mục /deepracer-log-analysis/logs trong IDE JupyterLab.
+
+<img src="img/9.png">
+
+Bây giờ chúng tôi đã sẵn sàng mở sổ ghi chép phân tích nhật ký của mình để phát huy tác dụng kỳ diệu của nó!
+
+3. Điều hướng đến thư mục /deepracer-log-analysis ở phía bên trái của IDE và chọn tệp .ipynb để mở sổ ghi chép.
+4. Khi mở sổ ghi chép, bạn có thể được nhắc cung cấp kernel. Chọn một nhân sử dụng Python 3, chẳng hạn như conda_tensorflow_p36.
+
+<img src="img/10.png">
+
+5. Đợi cho đến khi trạng thái hạt nhân thay đổi từ Bắt đầu sang Không hoạt động.
+6. Chỉnh sửa sổ ghi chép để chỉ định đường dẫn và tên của hai tệp nhật ký mà chúng tôi vừa tải lên.
+
+<img src="img/11.png">
+
+Để thực hiện trực quan hóa, chúng tôi sử dụng dữ liệu theo dõi mô phỏng từ tệp nhật ký RoboMaker và dữ liệu cập nhật chính sách từ tệp nhật ký Amazon SageMaker. Chúng tôi phân tích cú pháp dữ liệu trong sổ ghi chép bằng khung dữ liệu gấu trúc, là cấu trúc dữ liệu được gắn nhãn hai chiều như bảng tính hoặc bảng SQL.
+
+Đối với tệp nhật ký RoboMaker, chúng tôi tổng hợp thông tin quan trọng, chẳng hạn như tiến độ tối thiểu, tối đa và trung bình cũng như tỷ lệ hoàn thành vòng cho mỗi lần lặp lại các giai đoạn đào tạo.
+
+<img src="img/12.png">
+
+Đối với tệp nhật ký Amazon SageMaker, chúng tôi tính toán entropy trung bình trên mỗi kỷ nguyên trong mỗi lần lặp cập nhật chính sách.
+
+<img src="img/13.png">
+
+Thực hiện trực quan hóa
+
+Bây giờ chúng ta có thể chạy sổ ghi chép bằng cách chọn Chạy và Chạy Tất cả các Ô trong JupyterLab. Sổ ghi chép phân tích nhật ký của tôi chứa nhiều mô tả và nhận xét đánh dấu để giải thích chức năng của từng ô. Trong phần này, tôi nhấn mạnh một số hình dung từ cuốn sổ đó và giải thích một số quá trình suy nghĩ đằng sau chúng.
+
+Trực quan hóa phong bì hiệu suất của mô hình
+
+Những người mới bắt đầu sử dụng AWS DeepRacer thường có một câu hỏi là: “Nếu hai mô hình được đào tạo trong cùng một khoảng thời gian bằng cách sử dụng cùng chức năng phần thưởng và siêu tham số, thì tại sao chúng lại có thời gian vòng chạy khác nhau khi tôi đánh giá chúng?”
+
+Hình dung sau đây là một cách tuyệt vời để giải thích nó; nó hiển thị tần suất của hiệu suất đến thời gian vòng chạy tính bằng giây.
+
+<img src="img/14.png">
+
+Tôi sử dụng điều này để minh họa phong bì hiệu suất của mô hình của tôi. Chúng ta có thể chỉ ra xác suất tương đối của việc mô hình đạt được các thời gian vòng chạy khác nhau bằng cách vẽ biểu đồ về thời gian vòng chạy mà mô hình đạt được trong quá trình đào tạo. Chúng tôi cũng có thể tính toán theo thống kê thời gian vòng chạy trung bình và trường hợp tốt nhất mà chúng tôi có thể mong đợi từ mô hình. Tôi nhận thấy rằng thời gian vòng chạy của mô hình trong quá trình đào tạo giống với phân phối bình thường, vì vậy tôi sử dụng các điểm đánh dấu -2 và -3 Std Dev để hiển thị thời gian vòng chạy trong trường hợp tốt nhất tiềm năng cho mô hình, mặc dù chỉ với 2,275% (- 2 SD) và 0,135% (-3 SD) cơ hội xảy ra tương ứng. Bằng cách hiểu khả năng mô hình đạt được thời gian vòng chạy nhất định và so sánh thời gian đó với thời gian trên bảng xếp hạng, tôi có thể đánh giá xem mình có nên tiếp tục nhân bản và điều chỉnh mô hình hay từ bỏ mô hình đó và bắt đầu làm mới bằng một cách tiếp cận khác.
+
+Xác định các điểm kiểm tra mô hình tiềm năng để gửi cuộc đua
+
+Khi huấn luyện nhiều người mẫu khác nhau cho một cuộc đua, các tay đua thường hỏi: "Mô hình nào sẽ cho tôi cơ hội chiến thắng cuộc đua ảo cao nhất?"
+
+Để trả lời câu hỏi đó, tôi vẽ sơ đồ thời gian vòng đua thuộc nhóm tứ phân vị cao nhất (p25) so với số lần lặp lại từ dữ liệu huấn luyện, dữ liệu này xác định các mô hình tiềm năng để gửi cuộc đua. Biểu đồ phân tán này cũng cho phép tôi xác định khả năng đánh đổi giữa tốc độ (các chấm có thời gian vòng chạy rất nhanh) và độ ổn định (cụm các chấm dày đặc cho một lần lặp cụ thể). Từ sơ đồ sau, tôi sẽ chọn các mô hình từ ba lần lặp lại được đánh dấu để gửi cuộc đua.
+
+<img src="img/15.png">
+
+Xác định sự hội tụ và đánh giá tính nhất quán
+
+Khi các tay đua có kinh nghiệm đào tạo người mẫu, họ bắt đầu chú ý đến sự hội tụ trong các mô hình của mình. Nói một cách đơn giản, sự hội tụ trong bối cảnh AWS DeepRacer là khi một mô hình đang hoạt động gần với mức tốt nhất của nó (xét về tiến độ vòng đua trung bình) và việc đào tạo thêm có thể gây hại cho hiệu suất của mô hình hoặc khiến mô hình trở nên quá khớp , khiến mô hình chỉ hoạt động tốt cho đường đua đó trong một môi trường mô phỏng rất cụ thể, nhưng không phải trong các đường đua khác hoặc trong ô tô AWS DeepRacer vật lý. Điều đó đặt ra những câu hỏi sau: “Làm cách nào để biết khi nào mô hình đã hội tụ?” và “Mô hình của tôi nhất quán như thế nào sau khi nó đã hội tụ?”
+
+Để hỗ trợ hình dung sự hội tụ, tôi phủ thông tin entropy từ nhật ký đào tạo chính sách Amazon SageMaker lên các biểu đồ thông thường để nhận phần thưởng và tiến trình.
+
+Entropy là thước đo mức độ ngẫu nhiên trong mạng lưới thần kinh học tập tăng cường của chúng tôi. Khi bắt đầu đào tạo mô hình, entropy cao vì mạng thần kinh của chúng tôi được cập nhật chủ yếu dựa trên các hành động ngẫu nhiên khi ô tô khám phá đường đua.
+
+Theo thời gian, với nhiều kinh nghiệm thu được từ các hành động và phần thưởng ở các phần khác nhau của đường đua, chiếc xe bắt đầu khai thác thông tin này và thực hiện ít hành động ngẫu nhiên hơn.
+
+Suy nghĩ đằng sau điều này là khi phần thưởng và tiến độ tăng lên, giá trị entropy sẽ giảm xuống. Khi phần thưởng và tiến độ ổn định, sự mất mát entropy cũng sẽ giảm dần. Do đó, tôi sử dụng entropy như một chỉ số bổ sung cho sự hội tụ.
+
+Để đánh giá tính nhất quán của mô hình của mình, tôi cũng vẽ biểu đồ tỷ lệ hoàn thành vòng chạy trên mỗi lần lặp lại trong quá trình đào tạo. Khi mô hình có khả năng hoàn thành các vòng, tỷ lệ phần trăm của các vòng đã hoàn thành sẽ tăng lên trong các lần lặp lại tiếp theo, cho đến khi xung quanh điểm hội tụ, khi đó giá trị phần trăm cũng sẽ ổn định. Xem cốt truyện sau đây.
+
+<img src="img/16.png">
+
+Quá trình đào tạo mô hình là xác suất vì tác nhân học tăng cường kết hợp entropy để khám phá môi trường. Để làm mịn các tác động của mô hình xác suất trong trực quan hóa của mình, tôi sử dụng một đường trung bình động đơn giản qua ba lần lặp lại cho mỗi chỉ số được vẽ trên biểu đồ của mình.
+
+Xác định sự thiếu hiệu quả trong hành vi lái xe
+
+Khi các tay đua có một mẫu xe cạnh tranh, họ có thể bắt đầu tự hỏi: “Có đoạn nào trên đường đua mà xe lái không hiệu quả không? Đâu là những đoạn đường mà tôi có thể khuyến khích xe tăng tốc?”
+
+Để trả lời những câu hỏi này, tôi đã thiết kế một hình ảnh trực quan cho thấy tốc độ trung bình và góc lái của ô tô được đo tại mọi điểm tham chiếu dọc theo đường đua. Điều này cho phép tôi xem mô hình đang điều chỉnh đường đi như thế nào, bởi vì từ biểu đồ này, bạn có thể thấy tốc độ mà mô hình đang tăng tốc hoặc giảm tốc độ khi nó di chuyển qua các điểm tham chiếu. Hình ảnh trực quan sau đây cho thấy độ lệch của đường đua tối ưu (màu cam) so với đường tâm đường đua (màu xanh lam).
+
+<img src="img/17.png">
+
+Bạn cũng có thể xem cách mô hình điều chỉnh góc lái khi thương lượng các khúc cua. Điều tôi thích ở hình ảnh trực quan sau đây là nó cho phép tôi thấy rõ điểm nào sau một đoạn đường thẳng dài mà mô hình bắt đầu phanh trước khi vào cua. Nó cũng giúp tôi hình dung liệu một mô hình có tăng tốc đủ nhanh khi thoát khỏi một khúc cua hay không.
+
+<img src="img/18.png">
+
+Xác định các phần theo dõi để điều chỉnh hành động và phần thưởng
+
+Mặc dù tốc độ là tiêu chí hiệu suất chính trong cuộc đua thử thời gian, nhưng sự ổn định cũng rất quan trọng trong cuộc đua tránh đối tượng hoặc đối đầu. Bởi vì các hình phạt về thời gian do đi sai đường đua ảnh hưởng đến vị trí cuộc đua, điều rất quan trọng là phải tìm được sự cân bằng phù hợp giữa tốc độ và sự ổn định. Ngay cả khi mẫu xe có thể vượt qua đường đua tốt, các tay đua hàng đầu cũng đặt câu hỏi: “Chiếc xe có đang lái quá mức hoặc thiếu lái ở bất kỳ khúc cua nào không? Tôi nên tập trung tối ưu hóa vào lượt nào trong các thử nghiệm tiếp theo?”
+
+Bằng cách vẽ biểu đồ nhiệt phần thưởng trên đường đua, bạn có thể dễ dàng thấy mức độ nhất quán mà chúng tôi khen thưởng cho mô hình ở các phần khác nhau của đường đua. Một dải mỏng trong bản đồ nhiệt phản ánh phần thưởng rất nhất quán, trong khi các chấm rải rác thưa thớt thu hút sự chú ý đến các phần của đường đua mà người mẫu gặp khó khăn khi nhận phần thưởng. Đối với chức năng phần thưởng của tôi, điều này thường làm nổi bật các khúc cua mà tại đó mô hình lái quá hoặc lái thiếu.
+
+<img src="img/19.png">
+
+Ví dụ: trong các phần được đánh dấu của cốt truyện trước đó, mô hình không nhất quán đi quanh các khúc cua đó theo đường đua mà tôi đang thưởng. Nó thực sự đang lái quá tay khi thoát khỏi Lượt 3 (quanh điểm tham chiếu 62 – tham khảo hình ảnh trong phần Xác định hành vi lái xe không hiệu quả ) và bẻ lái thiếu ở hai ngã rẽ được đánh dấu khác. Tinh chỉnh không gian hành động có thể hữu ích (trong trường hợp đánh lái thiếu, giảm tốc độ ở góc đánh lái cao). Thật thú vị, tỷ lệ hoàn thành vòng đua của mô hình có thể tăng đáng kể với những điều chỉnh nhỏ như vậy mà không ảnh hưởng đến thời gian vòng đua!
+
+Thí nghiệm, thí nghiệm, thí nghiệm
+
+Đối với Giải đua F1 ProAm diễn ra vào tháng 5 năm 2020, tôi đã lên kế hoạch thực hiện hai thử nghiệm mỗi ngày (tổng cộng ít nhất 60 thử nghiệm) để thử các chiến lược phần thưởng và đường đua khác nhau. Tôi có thể lặp lại nhanh chóng trong khi tập trung vào các cải tiến gia tăng bằng cách sử dụng phân tích nhật ký để hiển thị thông tin chi tiết từ dữ liệu đào tạo.
+
+Ví dụ: cốt truyện sau đây đã giúp tôi trả lời câu hỏi “Có phải chiếc xe sẽ chạy hết vòng nhanh nhất có thể không?” bằng cách hiển thị nơi xe sử dụng 0 độ và tốc độ cao nhất.
+
+<img src="img/20.png">
+
+Dọn dẹp
+
+Để tiết kiệm chi phí điện toán ML, khi bạn hoàn thành phân tích nhật ký, bạn có thể dừng phiên bản sổ ghi chép mà không xóa nó. Các tệp sổ ghi chép, dữ liệu và nhật ký vẫn được giữ lại miễn là bạn không xóa phiên bản sổ ghi chép. Một phiên bản đã dừng vẫn phát sinh chi phí cho bộ lưu trữ ML được cung cấp. Tuy nhiên, bạn luôn có thể khởi động lại phiên bản sau để tiếp tục làm việc trên sổ ghi chép.
+
+Khi không cần sổ ghi chép hoặc dữ liệu nữa, bạn có thể xóa vĩnh viễn phiên bản, thao tác này cũng xóa ổ lưu trữ ML được đính kèm để bạn không còn phải chịu chi phí lưu trữ ML liên quan của phiên bản đó nữa.
+
+Để biết chi tiết về giá cho các phiên bản máy tính xách tay Amazon SageMaker, hãy xem Giá của Amazon SageMaker .
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 4.5/ Một số code  phần thưởng tối ưu :
 ### Example 1: Đi theo đường trung tâm trong thử nghiệm thời gian
     def reward_function(params):
